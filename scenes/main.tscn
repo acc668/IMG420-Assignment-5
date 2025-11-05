@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl04m5skiyra4"]
+
+[ext_resource type="Script" uid="uid://dkc6xci1lmmms" path="res://scripts/ParticleController.cs" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://cgxoksr4svus3" path="res://scripts/PhysicsChain.cs" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://q5vy50t407ir" path="res://scripts/LaserDetector.cs" id="3_tefeu"]
+[ext_resource type="Script" uid="uid://bfn0hyeayvgmt" path="res://scripts/Player.cs" id="4_o6xl0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jyhfs"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tbgi4"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(30, 30)
+
+[node name="Main" type="Node2D"]
+
+[node name="ParticleSystem" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_jyhfs")
+position = Vector2(200, 100)
+amount = 100
+texture = SubResource("PlaceholderTexture2D_jyhfs")
+lifetime = 2.0
+randomness = 0.5
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_tbgi4")
+script = ExtResource("1_jyhfs")
+
+[node name="PhysicsChain" type="Node2D" parent="."]
+position = Vector2(400, 50)
+script = ExtResource("2_tbgi4")
+
+[node name="LaserSystem" type="Node2D" parent="."]
+position = Vector2(100, 300)
+script = ExtResource("3_tefeu")
+PlayerPath = NodePath("../Player")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(300, 300)
+script = ExtResource("4_o6xl0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_tipki")
+debug_color = Color(1, 1, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+color = Color(0, 1, 1, 1)
