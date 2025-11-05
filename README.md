@@ -247,3 +247,48 @@ project/
 ```
 
 ---
+
+## Testing the Features
+
+Run the game (F5) and you should see:
+
+1. **Particles (upper-left, position 200, 100):**
+   - Colored particles falling with wave effects
+   - Orange to pink color gradient
+   - Pulsing animation
+
+2. **Chain (upper-middle, position 400, 50):**
+   - 5 hanging segments with alternating colors
+   - Swings when player walks into it
+   - Gradually comes to rest
+
+3. **Laser (left side, position 100, 300):**
+   - Green horizontal line
+   - Turns red when player crosses
+   - Console prints "ALARM! Player detected!"
+   - Returns to green when player leaves
+
+---
+
+## Common Issues
+
+**Particles not visible:**
+- Check that `custom_particle.gdshader` exists in project root
+- Ensure "Emitting" is checked ON in Inspector
+
+**Chain doesn't swing:**
+- Verify you're using the latest PhysicsChain.cs with collision layers
+- Player must be on collision layer 1
+
+**Laser doesn't detect:**
+- Build the project first
+- Set Player Path to `../Player` in LaserSystem Inspector
+
+---
+
+## Technologies Used
+
+- Godot Engine 4.x
+- C# / .NET 9.0
+- GLSL (shader language)
+- Godot Physics Engine
